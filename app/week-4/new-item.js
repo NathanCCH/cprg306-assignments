@@ -44,7 +44,7 @@ export default function NetItem() {
           <option value="other">Other</option>
         </select>
       </div>
-      <button onClick={handleSubmit} class="w-full h-10 text-white bg-blue-400 hover:bg-blue-500 rounded-lg ">Submit</button>
+      <button onClick={handleSubmit} className="w-full h-10 text-white bg-blue-400 hover:bg-blue-500 rounded-lg ">Submit</button>
     </form>
   );
 }
