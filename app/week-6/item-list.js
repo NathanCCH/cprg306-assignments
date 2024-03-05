@@ -1,14 +1,13 @@
 "use client";
 
 import Item from "./item";
-import itemJson from "./items.json";
 import { useState } from "react";
 
-export default function ItemList() {
+export default function ItemList({ items }) {
 
   const [sortBy, setSortBy] = useState("name");
 
-  const items = itemJson.sort((a, b) => {
+  const sortedItems = [...items].sort((a, b) => {
     if (sortBy === "name") {
       return a.name.localeCompare(b.name);
     } 
@@ -25,7 +24,7 @@ export default function ItemList() {
         <button onClick={() => setSortBy("category")} className={` ${sortBy === "category" ? 'bg-teal-500' : 'bg-teal-900'} rounded-md p-1 w-24`}>Category</button>
       </div>
       <ul>
-        {items.map((item, index) => (
+        {sortedItems.map((item, index) => (
           <Item key={index} name={item.name} quantity={item.quantity} category={item.category} />
         ))}
       </ul>

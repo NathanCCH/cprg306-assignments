@@ -9,7 +9,7 @@ export default function Page() {
 
   const [items, setItems] = useState(itemsData);
 
-  const handleAddItem = (item) => {
+  const handleAddItem = (newItem) => {
     setItems([...items, newItem]);
   };
 
@@ -19,7 +19,7 @@ export default function Page() {
         <h1 className="text-3xl font-bold mb-4 ">Shopping List</h1>
         <div>
           <NewItem onAddItem={handleAddItem} />
-          <ItemList />
+          <ItemList items={items} />
         </div>
       </div>
     </main>

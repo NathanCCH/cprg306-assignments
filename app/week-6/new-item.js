@@ -2,24 +2,29 @@
 
 import { useState } from "react";
 
-export default function NetItem() {
+export default function NetItem({ onAddItem }) {
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [category, setCategory] = useState("produce");
 
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    const newId = Math.floor(Math.random() * 1000000);
     const item = {
+      id: newId,
       name,
       quantity,
       category,
     };
+    
+    onAddItem(item);
 
     console.log(item);
 
-    alert(`Name: ${name}, Quantity: ${quantity}, Category: ${category}`);
-
+    
+    // Reset the form.
     setName("");
     setQuantity(1);
     setCategory("produce");
