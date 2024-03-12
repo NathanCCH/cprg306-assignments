@@ -32,7 +32,7 @@ export default function Page() {
   };
 
   return (
-    <main className="bg-cyan-950">
+    <main className="bg-cyan-950 flex">
       <div className="flex-1 p-10">
         <h1 className="text-2xl font-bold mb-4 ">Shopping List</h1>
         <div>
@@ -40,9 +40,9 @@ export default function Page() {
           <ItemList items={items} onItemSelect={handleItemSelect} />
         </div>
       </div>
-      <div className="inline-flex ">
+      <div className="flex-1 pt-20">
         <div>
-            <MealIdeas meal={selectedMeal} />
+            <MealIdeas ingredient={selectedMeal} />
         </div>
       </div>
     </main>
