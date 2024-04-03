@@ -7,7 +7,7 @@ import ItemList from "./item-list";
 import NewItem from "./new-item";
 
 import MealIdeas from "./meal-ideas";
-import { getItem, addItem } from "../_services/shopping-list-service";
+import { getItems, addItem } from "../_services/shopping-list-service";
 import { useEffect } from "react";
 
 
@@ -15,7 +15,7 @@ export default function Page() {
   const { user } = useUserAuth();
   const [items, setItems] = useState([]);
   const [selectedMeal, setSelectedMeal] = useState(null);
-  
+
   useEffect(() => {
     if (user) {
       loadItems();
@@ -40,8 +40,9 @@ export default function Page() {
 
   const handleAddItem = async (item) => {
     try {
-      const itemId = await addItem(user.uid, item);
-      setItems([...items, { id: itemId, ...item }]);
+      const newItemId = await addItem(user.uid, item);
+      const newItem = { ...item, id: newItemId };
+      setItems([...items, newItem]);
     } catch (error) {
       console.error("Error adding item:", error);
     }

@@ -2,10 +2,28 @@
 
 import { useUserAuth } from "./_utils/auth-context";
 import Link from "next/link";
+import { addItem, getItems } from "./_services/shopping-list-service";
+import { useState, useEffect } from "react";
 
 export default function Page() {
 
   const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    if (user) {
+      loadItems();
+    }
+  }, [user]);
+
+  async function loadItems() {
+    try {
+      const listItems = await getItems(user.uid);
+      setItems(listItems);
+    } catch (error) {
+      console.error("Error loading items:", error);
+    }
+  }
 
   async function handleSignIn() {
     try {

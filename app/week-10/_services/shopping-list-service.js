@@ -3,9 +3,8 @@ import { collection, getDocs, addDoc, query } from "firebase/firestore";
 
 async function getItems(userId) {
   try {
-    const userRef = doc(db, 'users', userId);
-    const itemsQuery = query(collection(userRef, 'items'));
-    const itemsSnapshot = await getDocs(itemsQuery);
+    const itemsRef = collection(db, "users", userId, "items");
+    const itemsSnapshot = await getDocs(query(itemsRef));
     const items = [];
 
     itemsSnapshot.forEach((doc) => {
@@ -23,9 +22,8 @@ async function getItems(userId) {
 
 async function addItem(userId, item) {
   try {
-    const userRef = doc(db, 'users', userId);
-    const itemsCollection = collection(userRef, 'items');
-    const docRef = await addDoc(itemsCollection, item);
+    const itemsRef = collection(db, "users", userId, "items");
+    const docRef = await addDoc(itemsRef, item);
     return docRef.id;
   } catch (error) {
     console.error("Error adding item:", error);
